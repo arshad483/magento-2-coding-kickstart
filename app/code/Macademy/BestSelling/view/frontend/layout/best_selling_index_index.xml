@@ -10,7 +10,13 @@
             </arguments>
         </referenceBlock>
         <referenceContainer name="content">
-            <block name="bestselling.description" template="Macademy_BestSelling::description.phtml"/>
+            <container htmlTag="div" htmlId="description-container">
+                <block name="bestselling.description" template="Macademy_BestSelling::description.phtml">
+                    <block name="bestselling.description.extra1" template="Macademy_BestSelling::description-extra.phtml" />
+                    <block name="bestselling.description.extra2" template="Macademy_BestSelling::description-extra.phtml" />
+                    <block name="bestselling.description.extra3" template="Macademy_BestSelling::description-extra.phtml" />
+                </block>
+            </container>
         </referenceContainer>
         <move element="wishlist_sidebar" destination="sidebar.additional" before="-"/>
         <referenceContainer name="catalog.compare.sidebar" remove="true"/>
