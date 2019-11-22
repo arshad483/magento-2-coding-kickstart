@@ -1,18 +1,25 @@
 <?php
 namespace Macademy\BestSelling\Controller\Me;
 
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 
 class Index extends Action
 {
+    protected $customerSession;
+
+    public function __construct(Context $context, Session $customerSession)
+    {
+        $this->customerSession = $customerSession;
+        parent::__construct($context);
+    }
+
     public function execute()
     {
         $result = $this->resultFactory->create(ResultFactory::TYPE_RAW);
-        $objectManager = ObjectManager::getInstance();
-        $customerSession = $objectManager->get('Magento\Customer\Model\Session');
-        $customerId = $customerSession->getCustomerId();
+        $customerId = $this->customerSession->getCustomerId();
         $result->setContents("customer id: $customerId");
         return $result;
     }
