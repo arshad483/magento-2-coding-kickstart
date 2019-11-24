@@ -30,6 +30,13 @@ class Index extends Action
 
         /** @var $bestsellersCollection BestsellersCollection */
         $bestsellersCollection = $this->bestsellersCollectionFactory->create();
+        $firstItem = $bestsellersCollection->getFirstItem();
+        $allItems = $bestsellersCollection->getItems();
+        echo '<pre>';
+        foreach ($allItems as $item) {
+            var_dump($item->getData());
+        }
+        die();
 
         $result->setContents("category_id: $categoryId, limit: $limit");
         return $result;
