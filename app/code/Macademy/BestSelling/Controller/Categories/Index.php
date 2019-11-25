@@ -1,9 +1,11 @@
 <?php
 namespace Macademy\BestSelling\Controller\Categories;
 
+use Macademy\BestSelling\Model\ResourceModel\Sales\Bestsellers;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\DB\Select;
 use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Magento\Sales\Model\ResourceModel\Report\Bestsellers\Collection as BestsellersCollection;
 use Magento\Sales\Model\ResourceModel\Report\Bestsellers\CollectionFactory as BestsellersCollectionFactory;
@@ -30,14 +32,17 @@ class Index extends Action
 
         /** @var $bestsellersCollection BestsellersCollection */
         $bestsellersCollection = $this->bestsellersCollectionFactory->create();
-        $filteredBestsellersCollection = $bestsellersCollection->addFieldToFilter('qty_ordered', [
-            'gt' => 1,
-        ]);
-        echo '<pre>';
-        var_dump($filteredBestsellersCollection->load()->getSelect()->__toString());
-        die();
-        $firstItem = $bestsellersCollection->getFirstItem();
-        $allItems = $filteredBestsellersCollection->getItems();
+        $macademyBestsellersTable = Bestsellers::MAIN_TABLE;
+        $bestsellersCollection->getSelect()
+            ->joinLeft(
+                $macademyBestsellersTable,
+                "sales_bestsellers_aggregated_yearly.id = $macademyBestsellersTable.id",
+                ['is_featured' => "SUM($macademyBestsellersTable.is_featured)"]
+            )
+            ->reset(Select::ORDER)
+            ->order('is_featured DESC')
+            ->order('qty_ordered DESC');
+        $allItems = $bestsellersCollection->getItems();
         echo '<pre>';
         foreach ($allItems as $item) {
             var_dump($item->getData());
