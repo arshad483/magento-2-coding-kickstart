@@ -30,8 +30,14 @@ class Index extends Action
 
         /** @var $bestsellersCollection BestsellersCollection */
         $bestsellersCollection = $this->bestsellersCollectionFactory->create();
+        $filteredBestsellersCollection = $bestsellersCollection->addFieldToFilter('qty_ordered', [
+            'gt' => 1,
+        ]);
+        echo '<pre>';
+        var_dump($filteredBestsellersCollection->load()->getSelect()->__toString());
+        die();
         $firstItem = $bestsellersCollection->getFirstItem();
-        $allItems = $bestsellersCollection->getItems();
+        $allItems = $filteredBestsellersCollection->getItems();
         echo '<pre>';
         foreach ($allItems as $item) {
             var_dump($item->getData());
