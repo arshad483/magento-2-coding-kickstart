@@ -13,10 +13,10 @@
 
 ## Summary
 
-This repository contains code examples for all lessons presented in the [Magento 2 Coding Kickstart](https://m.academy/p/magento-2-coding-kickstart/) course.
+This repository contains code examples for all lessons presented in the [Magento 2 Coding Kickstart](https://m.academy/courses/magento-2-coding-kickstart) course.
 
-<a href="https://m.academy/p/magento-2-coding-kickstart" target="_blank">
-<img src="https://raw.githubusercontent.com/markshust/magento-2-coding-kickstart/master/docs/course.png" alt="Magento 2 Coding Kickstart"><br />
+<a href="https://m.academy/courses/magento-2-coding-kickstart" target="_blank">
+<img src="https://raw.githubusercontent.com/markshust/magento-2-coding-kickstart/master/docs/course.png" alt="Magento 2 Coding Kickstart" width="500" height="355"><br />
 Magento 2 Coding Kickstart
 </a>
 
