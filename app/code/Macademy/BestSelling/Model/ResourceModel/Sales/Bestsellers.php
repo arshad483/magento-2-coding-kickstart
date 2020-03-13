@@ -7,6 +7,7 @@ class Bestsellers extends AbstractDb
 {
     const MAIN_TABLE = 'macademy_bestselling_sales_bestsellers';
     const ID_FIELD_NAME = 'id';
+    protected $_isPkAutoIncrement = false;
 
     /**
      * Resource initialization
